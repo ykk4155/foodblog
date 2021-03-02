@@ -78,9 +78,23 @@
             text-align: center;
             font-size: 0.85em;
         }
-        section#blogposts li {       
+        section #blogposts li {       
             list-style-type: none;     
             }
+        .root {
+            background-color:pink;
+            visibility: collapse;
+        }
+        .my-modal {
+            background-color: lightseagreen;
+        }
+        .modal-content{
+            background-color: lightsalmon; 
+            width: 10 px;
+            height: 10 px;
+            
+        }
+
     </style>
 </head>
 <body>
@@ -92,7 +106,7 @@
     
     <main>
     <aside id="photos">
-        <img src="images/chili.jpg" alt="White Chicken Chili" width="180">
+        <img :src="image" alt="White Chicken Chili" width="180">
     </aside>
 
     <h2><mycomponent2></mycomponent2></h2>
@@ -101,6 +115,7 @@
         <section id="blogposts">
         <ul id="foodblog">
             <li v-for = "food in posts">
+                <span><img :src="img" >{{ food.img}} </span>
                 <span class="author">{{ food.author }}</span>
                 <span class="date">{{ food.date }}</span>
                 <span class="reply">{{ food.reply }}</span>
@@ -109,6 +124,38 @@
     </section>
     </div>
     
+    <!-- MODAL-->
+<div id="root" > 
+  <div id="my-modal" class="modal fade" @on-close="true" visibilty="hidden">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Here is more ...!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Name: {{ name }}</p>
+          <p>Foodie Level: {{ foodielevel }}</p>
+          <p>Bio: {{ bio }}</p>
+        </div>
+        <div class="modal-footer">
+            <!-- <span><button @click="itemClicked(food)">ShowMore</button></span> -->
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="main">
+      <li v-for="item in items">
+          <span>{{ item.name }}</span>
+          <span><button @click="itemClicked(item)">ShowMore</button></span>
+      </li>
+  </div>
+</div>
+
     </main>
     <footer>
         &copy; Copyright FOOD BLOG
